@@ -39,7 +39,6 @@ def verificaTempo(select):
 def main():
 	entradas = processaEntradas(sys.argv)
 	vetor = geraVetor(entradas)
-
 	select = geraAlgoritimo(vetor[:], "ShellSort")
 	print "ShellSort"
 	verificaTempo(select)
