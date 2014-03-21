@@ -5,6 +5,11 @@ from random import randint
 from algoritimo import SelectionSort
 from algoritimo import BubbleSort
 from algoritimo import ShellSort
+from algoritimo import InsertionSort
+from algoritimo import Quicksort
+from algoritimo import Heapsort
+
+
 
 def processaEntradas(argv):
 	argc = len(argv)
@@ -28,6 +33,13 @@ def geraAlgoritimo(vetor,algo):
 		return SelectionSort(vetor)	
 	if algo == "BubbleSort":
 		return BubbleSort(vetor)
+	if algo == "InsertionSort":
+		return InsertionSort(vetor)
+	if algo == "Quicksort":
+		return Quicksort(vetor)
+	if algo == "Heapsort":
+		return Heapsort(vetor)
+
 
 def verificaTempo(select):
 	time_start = time.time()
@@ -42,14 +54,26 @@ def main():
 
 	select = geraAlgoritimo(vetor[:], "ShellSort")
 	print "ShellSort"
-	verificaTempo(select)
+#	verificaTempo(select)
 
 	select = geraAlgoritimo(vetor[:], "SelectionSort")
 	print "SelectionSort"
-	verificaTempo(select)
+#	verificaTempo(select)
 
 	select = geraAlgoritimo(vetor[:], "BubbleSort")
 	print "BubbleSort"
+#	verificaTempo(select)
+
+	select = geraAlgoritimo(vetor[:], "InsertionSort")
+	print "InsertionSort"
+#	verificaTempo(select)
+
+	select = geraAlgoritimo(vetor[:], "Quicksort")
+	print "Quicksort"
+	verificaTempo(select)
+
+	select = geraAlgoritimo(vetor[:], "Heapsort")
+	print "Heapsort"
 	verificaTempo(select)
 
 
