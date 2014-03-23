@@ -75,8 +75,8 @@ def main():
 	print "InsertionSort"
 	verificaTempo(select)
 
-	select = geraAlgoritimo(vetor[:], "ShellSort")
-	print "ShellSort"
+	select = geraAlgoritimo(vetor[:], "BubbleSort")
+	print "BubbleSort"
 	verificaTempo(select)
 
 	select = geraAlgoritimo(vetor[:], "Quicksort")
@@ -87,8 +87,6 @@ def main():
 	print "Heapsort"
 	verificaTempo(select)
 
-	select = geraAlgoritimo(vetor[:], "BubbleSort")
-	print "BubbleSort"
-	verificaTempo(select)
+
 
 main()
