@@ -1,0 +1,72 @@
+ETAPA 1:
+	Aula tema: Pesquisa de Dados: Sequencial. Pesquisa de Dados: Binária. Métodos de Ordenação: Seleção, Troca.
+
+	Passo 1 (Equipe):
+		1. Busca linear.
+		2. Busca linear com sentinela.
+		3. Busca Binária.
+		4. Ordenação usando seleção.
+		5. Ordenação usando bubblesort
+
+	Passo 4 (Equipe):
+		1. qual o método de busca com melhor desempenho computacional – é importante
+			lembrar que os testes relacionados a tempo serão dependentes da máquina
+			utilizada;
+		2. indicar o desempenho da busca binária x busca linear x busca linear com sentinela:
+			descrever se compensa ordenar uma base de dados para então recuperar a
+			informação com a busca binária ou se outra busca foi mais eficaz nos testes
+			realizados;
+		3. qual foi a conclusão da equipe nessa bateria de testes.
+		
+
+ETAPA 3:
+	Aula tema: Árvores de Pesquisa, Árvores Binárias de Pesquisa. Árvores AVL. B-Trees.
+	
+	Passo 1 (Equipe):
+		árvores binárias
+
+	Passo 2 (Equipe):
+		árvore AVL
+	
+	Passo 3 (Equipe):
+		árvore B-Tree
+
+	Passo 4 (Equipe):
+		1. a análise sobre cada algoritmo utilizado;
+		2. apontar as diferenças entre os algoritmos;
+		3. indicar sua aplicação.
+
+ETAPA 4
+	Aula tema: Árvores de Pesquisa, Árvores Binárias de Pesquisa. Árvores AVL.
+
+	Passo 1 (Equipe):
+		Por esse motivo a Leader Team deverá apresentar explicações sobre as análises
+		realizadas neste estudo.
+		1. A primeira questão a ser considerada é por que houve reclamações de clientes com
+			relação a desempenho.
+		2. A segunda é se existe um algoritmo de ordenação que pode ser usado como padrão
+			para qualquer base de dados. Se sim, expliquem e digam qual, se não explicarem,
+			por quê.
+			
+	Passo 2 (Equipe):
+		Apresentar os principais aspectos que devem ser levados em consideração no momento da
+		escolha do método a ser usado para ordenar uma base de dados e mantê-la ordenada. Para
+		isso deverão considerar principalmente:
+
+		1. a dimensão da base de dados;
+		2. o número de execuções de ordenação realizadas pelo sistema;
+		3. o número de buscas realizadas pelo sistema.
+		
+	Passo 3 (Equipe):
+		1. a contextualização do Passo 1 e 2 dessa Etapa final;
+		2. a posição da equipe sobre as melhores práticas em situações que envolvam
+		pequenas bases de dados, grandes bases de dados e bases de dados de tamanho
+		médio;
+		3. as considerações finais da equipe sobre o estudo realizado.
+	
+
+	
+		
+
+
+
