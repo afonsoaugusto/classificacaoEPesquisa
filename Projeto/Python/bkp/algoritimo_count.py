@@ -194,3 +194,5 @@ class Heapsort(Algorithm):
 	def sort(self):
 		list = self.vetor 
 		self.heapsort(list) 
+		print (" Comparações: %02d" % self.comparacao)
+		print (" Trocas:	%02d" % self.troca)

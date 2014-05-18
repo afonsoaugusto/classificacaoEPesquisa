@@ -1,0 +1,10 @@
+Algoritimo -> Detalhes Execução <-Execução
+
+
+Algoritimo -> classe, estrutura de dados, complexidade pior caso, complexidade caso médio, complexidade melhor caso, complexidade de espaços pior caso
+
+Execução -> N, Low, High, Seed, Find Number, Find Second Number,Quantidade, Data, Modo
+
+Detalhes Execução -> Algoritimo, Execução,  Nº Comparações, Nº trocas, Tempo, Data
+
+

@@ -2,19 +2,26 @@ import sys
 import time
 from define import Entradas
 from random import randint
-from algoritimo import SelectionSort
-from algoritimo import BubbleSort
-from algoritimo import ShellSort
-from algoritimo import InsertionSort
-from algoritimo import Quicksort
-from algoritimo import Heapsort
 
-#from algoritimo_count import SelectionSort
-#from algoritimo_count import BubbleSort
-#from algoritimo_count import ShellSort
-#from algoritimo_count import InsertionSort
-#from algoritimo_count import Quicksort
-#from algoritimo_count import Heapsort
+print "Informe ''1'' para algoritimo sera executado com os contadores ou ''0'' para nao"
+
+a = input()
+
+if a == 1:
+	from algoritimo_count import SelectionSort
+	from algoritimo_count import BubbleSort
+	from algoritimo_count import ShellSort
+	from algoritimo_count import InsertionSort
+	from algoritimo_count import Quicksort
+	from algoritimo_count import Heapsort
+else:
+	from algoritimo import SelectionSort
+	from algoritimo import BubbleSort
+	from algoritimo import ShellSort
+	from algoritimo import InsertionSort
+	from algoritimo import Quicksort
+	from algoritimo import Heapsort
+	
 
 
 
@@ -29,18 +36,23 @@ def processaEntradas(argv):
 
 def geraVetor(entradas):
 	lista = []
-	for i in range (entradas.N):
-		lista.append(randint(entradas.LOW, entradas.HIGH))
+	
+	if entradas.MODO == "-A":
+		for i in range (entradas.N):
+			lista.append(randint(entradas.LOW, entradas.HIGH))
+		return lista
+		
+	if entradas.MODO == "-C":
+		for i in range (entradas.N):
+			lista.append(i)
+		return lista
+		
+	if entradas.MODO == "-D":
+		for i in range (entradas.N-1,-1,-1):
+			lista.append(i)
+		return lista
 	return lista
-
-#	for i in range (entradas.N):
-#		lista.append(i)
-#	return lista
-
-#	for i in range (entradas.N-1,-1,-1):
-#		lista.append(i)
-#	return lista
-
+	
 def geraAlgoritimo(vetor,algo):
 	if algo == "ShellSort":
 		return ShellSort(vetor)
@@ -91,4 +103,6 @@ def main():
 	print "BubbleSort"
 	verificaTempo(select)
 
-main()
+for i in range (3):
+	sys.setrecursionlimit(2 ** 30)
+	main()

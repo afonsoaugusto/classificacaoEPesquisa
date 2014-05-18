@@ -3,6 +3,6 @@ class Entradas:
 	LOW,HIGH,SEED,NUM_FIND,NUM_SECOND_FIND = 0,100000,1234554321,87,100001
 #	LOW,HIGH,SEED,NUM_FIND,NUM_SECOND_FIND = 0,100,1234554321,87,100001
 	
-	def __init__(self, N = 100, MODO = "-A"):
+	def __init__(self, N = 100, ALGORITIMO = "ShellSort"):
 		self.N = N
-		self.MODO = MODO
+		self.ALGORITIMO = ALGORITIMO
