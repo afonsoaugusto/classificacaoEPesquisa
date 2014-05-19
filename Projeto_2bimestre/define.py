@@ -6,7 +6,7 @@ from sqlalchemy import Column, ForeignKey, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
- 
+
 Base = declarative_base()
 
 class Algoritimo(Base):
@@ -25,16 +25,16 @@ class Execucao(Base):
 	__tablename__ = 'execucao'
 
 	id = Column(Integer, primary_key=True)
-	N = Column(Integer, dafault=100)
-	LOW = Column(Integer, dafault=0)
-	HIGH = Column(Integer, dafault=100000)
-	SEED = Column(Integer, dafault=1234554321)
-	NUM_FIND = Column(Integer, dafault=87)
-	NUM_SECOND_FIND = Column(Integer, dafault=100001)
-    DATE_EXECUTION  = Column(DateTime, default=datetime.utcnow)
+	N = Column(Integer, default=100)
+	LOW = Column(Integer, default=0)
+	HIGH = Column(Integer, default=100000)
+	SEED = Column(Integer, default=1234554321)
+	NUM_FIND = Column(Integer, default=87)
+	NUM_SECOND_FIND = Column(Integer, default=100001)
+	DATE_EXECUTION  = Column(DateTime, default=datetime.datetime.utcnow)
 	MODE = Column(String(3), default='-A')
 
-class Detalhes:
+class Detalhes(Base):
 	__tablename__ = 'detalhes'
 
 	id = Column(Integer, primary_key=True)
@@ -43,12 +43,11 @@ class Detalhes:
 	data = (DateTime)
 
 	algoritimo_id = Column(Integer, ForeignKey('execucao.id'))
-	algoritimo = relationship(Algoritimo)
+	#algoritimo = relationship(Algoritimo)
 	execucao_id = Column(Integer, ForeignKey('execucao.id'))
-	execucao = relationship(Execucao)
+	#execucao = relationship(Execucao)
 
 # Create an engine that stores data in the local directory's
-# sqlalchemy_example.db file.
 engine = create_engine('sqlite:///classificacao_pesquisa.db')
  
 # Create all tables in the engine. This is equivalent to "Create Table"

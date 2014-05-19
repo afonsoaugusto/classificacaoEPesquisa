@@ -19,7 +19,6 @@ c.execute('SELECT * FROM execucao')
 print c.fetchall()
 conn.close()
 
-execucao = 
 execucao.MODE = 'TA'
 c2.persistirObjeto(execucao)
 

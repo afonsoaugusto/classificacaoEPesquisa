@@ -8,3 +8,12 @@ Execução -> N, Low, High, Seed, Find Number, Find Second Number,Quantidade, Da
 Detalhes Execução -> Algoritimo, Execução,  Nº Comparações, Nº trocas, Tempo, Data
 
 
+
+class Entradas:
+	LOW,HIGH,SEED,NUM_FIND,NUM_SECOND_FIND = 0,100000,1234554321,87,100001
+#	LOW,HIGH,SEED,NUM_FIND,NUM_SECOND_FIND = 0,100,1234554321,87,100001
+	
+	def __init__(self, N = 100, MODO = "-A"):
+		self.N = N
+		self.MODO = MODO
+s
