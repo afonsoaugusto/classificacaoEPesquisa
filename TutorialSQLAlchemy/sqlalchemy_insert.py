@@ -27,10 +27,18 @@ session.add(new_person)
 session.commit()
  
 # Insert an Address in the address table
-new_address = Address(post_code='00000', person=new_person)
+new_address = Address(post_code='00011', person=new_person)
 session.add(new_address)
 session.commit()
 
+nova_pessoa = session.query(Address).filter(Address.post_code == '00015').all()
+print ''
+print ''
+print ''
+print len(nova_pessoa)
+print ''
+print ''
+print ''
 
 
 import sqlite3

@@ -13,12 +13,14 @@ class Algoritimo(Base):
 	__tablename__ = 'algoritimo'
 
 	id = Column(Integer, primary_key=True)
+	nomeAlgoritimo = Column(String(50))
 	classe = Column(String(250))
 	estruturaDados = Column(String(50))
 	complexidadePiorCaso = Column(String(50))
 	complexidadeMedioCaso = Column(String(50))
 	complexidadeMelhorCaso = Column(String(50))
-	complexidadeEspacos = Column(String(250))
+	complexidadeEspacos = Column(String(50))
+	pseudoAlgoritimo = Column(String(4000))
 
 
 class Execucao(Base):
