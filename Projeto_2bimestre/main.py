@@ -71,10 +71,10 @@ def ordenacaoSelecao(controller):
 		algoritimo.nomeAlgoritimo = nome
 		algoritimo.classe = 'Algoritmo de odernação'
 		algoritimo.estruturaDados = 'Array, Listas ligadas'
-		algoritimo.complexidadePiorCaso = 'O(n^2)'
-		algoritimo.complexidadeMedioCaso = 'O(n^2)'
-		algoritimo.complexidadeMelhorCaso = 'O(n^2)'
-		algoritimo.complexidadeEspacos = 'O(n) total, O(1) auxiliar'
+		algoritimo.complexidadePiorCaso = u'O(n^2)'
+		algoritimo.complexidadeMedioCaso = u'O(n^2)'
+		algoritimo.complexidadeMelhorCaso = u'O(n^2)'
+		algoritimo.complexidadeEspacos = u'O(n) total, O(1) auxiliar'
 		algoritimo.pseudoAlgoritimo = ''
 		controller.persistirObjeto(algoritimo)
 	return algoritimo
@@ -85,10 +85,10 @@ def ordenacaoSelecao(controller):
 sys.setrecursionlimit(2 ** 30)
 controller = Controller()
 
-buscaLinear = buscaLinearInit(controller) 
-print buscaLinear.id
-buscaLinearSentinela = buscaLinearSentinelaInit(controller)
-buscaBinaria = buscaLinearBinaria(controller)
+#buscaLinear = buscaLinearInit(controller) 
+#print buscaLinear.id
+#buscaLinearSentinela = buscaLinearSentinelaInit(controller)
+#buscaBinaria = buscaLinearBinaria(controller)
 selecao = ordenacaoSelecao(controller)
 bubblesort = Algoritimo()
 arvoreBinaria = Algoritimo()

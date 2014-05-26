@@ -1,8 +1,9 @@
+# -*- coding: utf-8 -*-
 import os
 import sys
 import datetime
 from sqlalchemy.sql import func
-from sqlalchemy import Column, ForeignKey, Integer, String, DateTime
+from sqlalchemy import Column, ForeignKey, Integer, String, DateTime,String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
@@ -21,7 +22,6 @@ class Algoritimo(Base):
 	complexidadeMelhorCaso = Column(String(50))
 	complexidadeEspacos = Column(String(50))
 	pseudoAlgoritimo = Column(String(4000))
-
 
 class Execucao(Base):
 	__tablename__ = 'execucao'
@@ -51,6 +51,8 @@ class Detalhes(Base):
 
 # Create an engine that stores data in the local directory's
 engine = create_engine('sqlite:///classificacao_pesquisa.db')
+engine.raw_connection().connection.text_factory = str
+#engine = create_engine('oracle://ADMSIREP:ADMSIREP@localhost:1521/xe')
  
 # Create all tables in the engine. This is equivalent to "Create Table"
 # statements in raw SQL.

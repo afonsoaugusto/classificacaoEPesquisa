@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from define import Algoritimo, Execucao,Detalhes
@@ -5,6 +6,8 @@ from define import Base
 
 class Controller:
 	engine = create_engine('sqlite:///classificacao_pesquisa.db')
+	engine.raw_connection().connection.text_factory = str
+	#engine = create_engine('oracle:/ADMSIREP:ADMSIREP@localhost:1521/xe')
 	Base.metadata.bind = engine
 	DBSession = sessionmaker(bind=engine)
 
