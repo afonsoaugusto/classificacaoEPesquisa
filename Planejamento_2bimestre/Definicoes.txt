@@ -1,0 +1,58 @@
+1. Busca linear.
+	classe								Algoritmo de busca
+	estrutura de dados					Array, Listas ligadas
+	complexidade caso médio				{O}(n/2)
+	complexidade melhor caso			{O}(1)
+	complexidade de espaços pior caso	{O}(n)
+	otimo								Sim
+	espaço								{O}(1)
+2. Busca linear com sentinela.
+3. Busca Binária.
+	classe								Algoritmo de busca
+	estrutura de dados					Array, Listas ligadas
+	complexidade caso médio				{O}(\log n)
+	complexidade melhor caso			{O}(1)
+	complexidade de espaços pior caso	{O}(\log n)
+	otimo								Sim
+	espaço								{O}(1)
+4. Ordenação usando seleção.
+5. Ordenação usando bubblesort
+
+árvores binárias
+árvore AVL
+árvore B-Tree
+
+
+
+1. Busca linear.
+	def sequentialSearch(alist, item):
+		pos = 0
+		found = False
+	
+		while pos < len(alist) and not found:
+			if alist[pos] == item:
+				found = True
+			else:
+				pos = pos+1
+	
+		return found
+2. Busca linear com sentinela.
+3. Busca Binária.
+	def binsearch(seq, search):    
+	   right = len(seq)
+	   left = 0
+	   previous_center = -1
+	   if search < seq[0]:
+		   return -1
+	   while 1:
+		   center = (left + right) / 2
+		   candidate = seq[center]
+		   if search == candidate:
+			   return center
+		   if center == previous_center:
+			   return - 2 - center
+		   elif search < candidate:
+			   right = center
+		   else:
+			   left = center
+		   previous_center = center
