@@ -11,8 +11,8 @@ class Algorithm(AlgorithmInterface):
 
 	def __init__(self, vetor):
 		self.vetor = vetor
-		self.self.comparacao = 0
-		self.self.troca = 0
+		self.comparacao = 0
+		self.troca = 0
 
 	def sort(self):
 		pass
