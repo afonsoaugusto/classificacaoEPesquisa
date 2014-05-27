@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import, unicode_literals
 import sys
 import time
 from define import Algoritimo, Execucao,Detalhes
 from random import randint
 from controller import Controller
-from utils
+from utils import Util
 
 def main():
 	sys.setrecursionlimit(2 ** 30)
@@ -75,14 +76,14 @@ def buscaLinearBinariaInit(controller):
 	return algoritimo
 	
 def ordenacaoSelecaoInit(controller):
-	nome = 'Ordenacao Selecao'
+	nome = 'Ordenação Seleção'
 	algoritimo = Algoritimo()
 	algoritimo.nomeAlgoritimo = nome
 	algoritimo = controller.findAlgoritimo(algoritimo)
 	if algoritimo == None:
 		algoritimo = Algoritimo()
 		algoritimo.nomeAlgoritimo = nome
-		algoritimo.classe = 'Algoritmo de odernacao'
+		algoritimo.classe = 'Algoritmo de ordenação'
 		algoritimo.estruturaDados = 'Array, Listas ligadas'
 		algoritimo.complexidadePiorCaso = u'O(n^2)'
 		algoritimo.complexidadeMedioCaso = u'O(n^2)'
@@ -93,14 +94,14 @@ def ordenacaoSelecaoInit(controller):
 	return algoritimo
 
 def ordenacaoBolhaInit(controller):
-	nome = 'Ordenacao BubbleSort'
+	nome = 'Ordenação BubbleSort'
 	algoritimo = Algoritimo()
 	algoritimo.nomeAlgoritimo = nome
 	algoritimo = controller.findAlgoritimo(algoritimo)
 	if algoritimo == None:
 		algoritimo = Algoritimo()
 		algoritimo.nomeAlgoritimo = nome
-		algoritimo.classe = 'Algoritmo de odernacao'
+		algoritimo.classe = 'Algoritmo de ordenação'
 		algoritimo.estruturaDados = 'Array, Listas ligadas'
 		algoritimo.complexidadePiorCaso = u'O(n^2)'
 		algoritimo.complexidadeMedioCaso = u'O(n^2)'

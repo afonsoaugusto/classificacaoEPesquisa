@@ -5,7 +5,7 @@ from random import randint
 from define import Execucao
 
 
-class Util(Object):
+class Util(object):
 	def geraVetor(execucao):
 		lista = []
 		
