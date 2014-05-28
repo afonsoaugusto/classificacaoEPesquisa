@@ -4,10 +4,11 @@ import os
 import sys
 import datetime
 from sqlalchemy.sql import func
-from sqlalchemy import Column, ForeignKey, Integer, String, DateTime,String
+from sqlalchemy import Column, ForeignKey, Integer, String, DateTime,String,Float
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
+#import cx_Oracle
 
 Base = declarative_base()
 
@@ -36,6 +37,7 @@ class Execucao(Base):
 	NUM_SECOND_FIND = Column(Integer, default=100001)
 	DATE_EXECUTION  = Column(DateTime, default=datetime.datetime.utcnow)
 	MODE = Column(String(3), default='-A')
+	VECTOR = Column(String(4000))
 
 class Detalhes(Base):
 	__tablename__ = 'detalhes'
@@ -43,7 +45,7 @@ class Detalhes(Base):
 	id = Column(Integer, primary_key=True)
 	quantidadeComparacoes = Column(Integer)
 	quantidadeTrocas = Column(Integer)
-	data = (DateTime)
+	tempoExecucao = Column(Float, default=0.0)
 
 	algoritimo_id = Column(Integer, ForeignKey('execucao.id'))
 	#algoritimo = relationship(Algoritimo)
@@ -55,6 +57,7 @@ engine = create_engine('sqlite:///classificacao_pesquisa.db')
 engine.raw_connection().connection.text_factory = str
 #engine = create_engine('oracle://ADMSIREP:ADMSIREP@localhost:1521/xe')
  
+
 # Create all tables in the engine. This is equivalent to "Create Table"
 # statements in raw SQL.
 Base.metadata.create_all(engine)

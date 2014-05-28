@@ -6,6 +6,12 @@ from define import Algoritimo, Execucao,Detalhes
 from random import randint
 from controller import Controller
 from utils import Util
+from algoritimo_count import SelectionSort
+from algoritimo_count import BubbleSort
+from algoritimo_count import ShellSort
+from algoritimo_count import InsertionSort
+from algoritimo_count import Quicksort
+from algoritimo_count import Heapsort
 
 def main():
 	sys.setrecursionlimit(2 ** 30)
@@ -19,6 +25,43 @@ def main():
 	arvoreBinaria = arvoreBinariaInit(controller)
 	arvoreAvl = arvoreAVLInit(controller)
 	arvoreBTree = arvoreBTreeInit(controller)
+	n = 100
+	for i in range(3):
+		for a in (['-A','-D','-C']):
+			execucao = Execucao()
+			execucao.MODE = a
+			execucao.N = n * n
+			execucao = controller.persistirObjeto(execucao)
+			util = Util()
+			vector = util.geraVetor(execucao)
+			
+			#parte individual de cada teste
+			detalhes = detalhesInit(execucao,selecao)
+			select = SelectionSort(vector[:])
+			detalhes = verificaTempo(select,detalhes)
+			detalhes = controller.persistirObjeto(detalhes)
+
+			detalhes = detalhesInit(execucao,bubblesort)
+			select = BubbleSort(vector[:])
+			detalhes = verificaTempo(select,detalhes)
+			detalhes = controller.persistirObjeto(detalhes)
+
+
+def detalhesInit(execucao,algoritimo):
+	detalhes = Detalhes()
+	detalhes.execucao_id = execucao.id
+	detalhes.algoritimo_id = algoritimo.id
+	return detalhes
+
+def verificaTempo(select,detalhes):
+	time_start = time.time()
+	select.sort()
+	time_stop = time.time()
+	time_execution = time_stop - time_start
+	detalhes.tempoExecucao = time_execution
+	detalhes.quantidadeComparacoes = select.comparacao
+	detalhes.quantidadeTrocas = select.troca
+	return detalhes
 
 
 def buscaLinearInit(controller):
@@ -36,7 +79,7 @@ def buscaLinearInit(controller):
 		algoritimo.complexidadeMelhorCaso = '{O}(1)'
 		algoritimo.complexidadeEspacos = ''
 		algoritimo.pseudoAlgoritimo = ''
-		controller.persistirObjeto(algoritimo)
+		algoritimo = controller.persistirObjeto(algoritimo)
 	return algoritimo
 	
 def buscaLinearSentinelaInit(controller):
@@ -54,7 +97,7 @@ def buscaLinearSentinelaInit(controller):
 		algoritimo.complexidadeMelhorCaso = '{O}(1)'
 		algoritimo.complexidadeEspacos = ''
 		algoritimo.pseudoAlgoritimo = ''
-		controller.persistirObjeto(algoritimo)
+		algoritimo = controller.persistirObjeto(algoritimo)
 	return algoritimo
 	
 def buscaLinearBinariaInit(controller):
@@ -72,7 +115,7 @@ def buscaLinearBinariaInit(controller):
 		algoritimo.complexidadeMelhorCaso = '{O}(1)'
 		algoritimo.complexidadeEspacos = '{O}(\log n)'
 		algoritimo.pseudoAlgoritimo = ''
-		controller.persistirObjeto(algoritimo)
+		algoritimo = controller.persistirObjeto(algoritimo)
 	return algoritimo
 	
 def ordenacaoSelecaoInit(controller):
@@ -90,7 +133,7 @@ def ordenacaoSelecaoInit(controller):
 		algoritimo.complexidadeMelhorCaso = u'O(n^2)'
 		algoritimo.complexidadeEspacos = u'O(n) total, O(1) auxiliar'
 		algoritimo.pseudoAlgoritimo = ''
-		controller.persistirObjeto(algoritimo)
+		algoritimo = controller.persistirObjeto(algoritimo)
 	return algoritimo
 
 def ordenacaoBolhaInit(controller):
@@ -108,7 +151,7 @@ def ordenacaoBolhaInit(controller):
 		algoritimo.complexidadeMelhorCaso = u'O(n)'
 		algoritimo.complexidadeEspacos = u'O(1) auxiliar'
 		algoritimo.pseudoAlgoritimo = ''
-		controller.persistirObjeto(algoritimo)
+		algoritimo = controller.persistirObjeto(algoritimo)
 	return algoritimo
 	
 def arvoreBinariaInit(controller):
@@ -119,7 +162,7 @@ def arvoreBinariaInit(controller):
 	if algoritimo == None:
 		algoritimo = Algoritimo()
 		algoritimo.nomeAlgoritimo = nome
-		controller.persistirObjeto(algoritimo)
+		algoritimo = controller.persistirObjeto(algoritimo)
 	return algoritimo
 
 	
@@ -131,7 +174,7 @@ def arvoreAVLInit(controller):
 	if algoritimo == None:
 		algoritimo = Algoritimo()
 		algoritimo.nomeAlgoritimo = nome
-		controller.persistirObjeto(algoritimo)
+		algoritimo = controller.persistirObjeto(algoritimo)
 	return algoritimo
 	
 def arvoreBTreeInit(controller):
@@ -142,7 +185,7 @@ def arvoreBTreeInit(controller):
 	if algoritimo == None:
 		algoritimo = Algoritimo()
 		algoritimo.nomeAlgoritimo = nome
-		controller.persistirObjeto(algoritimo)
+		algoritimo = controller.persistirObjeto(algoritimo)
 	return algoritimo
 
 	

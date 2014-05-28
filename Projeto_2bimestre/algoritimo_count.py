@@ -32,8 +32,7 @@ class SelectionSort(Algorithm):
 			if(i != min):
 				vetor[i],vetor[min] = vetor[min],vetor[i]
 				self.troca += 1
-		print (" Comparações: %02d" % self.comparacao)
-		print (" self.trocas:	%02d" % self.troca)
+
 
 
 class BubbleSort(Algorithm):
@@ -48,8 +47,7 @@ class BubbleSort(Algorithm):
 				if(vetor[j-1] > vetor[j]):
 					vetor[j-1],vetor[j] = vetor[j],vetor[j-1]
 					self.troca += 1
-		print (" Comparações: %02d" % self.comparacao)
-		print (" self.trocas:	%02d" % self.troca)
+
 
 
 class ShellSort(Algorithm):
@@ -73,8 +71,7 @@ class ShellSort(Algorithm):
 					self.troca += 1
 				array[j] = val
 			gap //= 2
-		print (" Comparações: %02d" % self.comparacao)
-		print (" self.trocas:	%02d" % self.troca)
+
 
 
 class InsertionSort(Algorithm):
@@ -92,13 +89,10 @@ class InsertionSort(Algorithm):
 				self.comparacao += 2
 				self.troca += 1
 			v[i + 1] = chave
-		print (" Comparações: %02d" % self.comparacao)
-		print (" self.trocas:	%02d" % self.troca)
+
 
 
 class Quicksort(Algorithm):
-	self.comparacao = 0
-	self.troca = 0
 
 	"Everybody's favourite sorting algorithm... :)"
 	def partition(self,list, start, end):
@@ -115,15 +109,15 @@ class Quicksort(Algorithm):
 				bottom = bottom+1                  # ... move the bottom up.
 
 
-                                self.self.comparacao += 1
+                                self.comparacao += 1
 				if bottom == top:					# If we hit the top...
 					done = 1                       # ... we are done.
 					break
 
-                                self.self.comparacao += 1
+                                self.comparacao += 1
 				if list[bottom] > pivot:           # Is the bottom out of place?
 					list[top] = list[bottom]       # Then put it at the top...
-					self.self.troca += 1
+					self.troca += 1
 					break                          # ... and start searching from the top.
 
 
@@ -131,28 +125,28 @@ class Quicksort(Algorithm):
 					top = top-1                        # ... move the top down.
 
 
-                                        self.self.comparacao += 1
+                                        self.comparacao += 1
                                         if top == bottom:                  # If we hit the bottom...
                                                 done = 1                       # ... we are done.
                                                 break
 
 
-                                        self.self.comparacao += 1
+                                        self.comparacao += 1
                                         if list[top] < pivot:              # Is the top out of place?
                                                 list[bottom] = list[top]       # Then put it at the bottom...
-                                                self.self.troca += 1
+                                                self.troca += 1
                                                 break                          # ...and start searching from the bottom.
 
 
 		list[top] = pivot                          # Put the pivot in its place.
-		self.self.troca += 1
+		self.troca += 1
 		return top                                 # Return the split point
 
 
 
 
 	def quicksort(self,list, start, end):
-                self.self.comparacao += 1
+                self.comparacao += 1
 		if start < end:                            # If there are two or more elements...
 			split = self.partition(list, start, end)    # ... partition the sublist...
 			self.quicksort(list, start, split-1)        # ... and sort both halves.
@@ -162,34 +156,33 @@ class Quicksort(Algorithm):
 
 
 	def sort(self):
+		self.comparacao = 0
+		self.troca = 0
 		list = self.vetor 				              # Get all the arguments
 		start = 0
 		end = len(list)-1
 		self.quicksort(list,start,end)                  # Sort the entire list of arguments
-		print (" Comparações: %02d" % self.self.comparacao)
-		print (" self.trocas:	%02d" % self.self.troca)
+
 
 class Heapsort(Algorithm):
-	self.comparacao = 0
-	self.troca = 0
 
 	def sift_down(self,arr, root, bottom):
 		while root*2 <= bottom:
-                        self.self.comparacao += 1
+                        self.comparacao += 1
 			if root*2 == bottom:
 				newr = root*2
 			elif arr[root*2-1]>arr[root*2]:
 				newr = root*2
-				self.self.comparacao += 1
+				self.comparacao += 1
 			else:
 				newr = root*2 + 1
-				self.self.comparacao += 1
+				self.comparacao += 1
 
-                        self.self.comparacao += 1
+                        self.comparacao += 1
 			if arr[root-1] < arr[newr-1]:
 				arr[root-1], arr[newr-1] = arr[newr-1], arr[root-1]
 				root=newr
-				self.self.troca += 1
+				self.troca += 1
 			else:
 				break
 
@@ -199,11 +192,11 @@ class Heapsort(Algorithm):
 		for i in range( len(arr), 0, -1 ):
 			arr[i-1], arr[0] = arr[0], arr[i-1]
 			self.sift_down(arr, 1, i-1)
-			self.self.troca += 1
+			self.troca += 1
 
 	def sort(self):
+		self.comparacao = 0
+		self.troca = 0
 		list = self.vetor 
 		self.heapsort(list) 
-		print (" Comparações: %02d" % self.self.comparacao)
-		print (" self.trocas:	%02d" % self.self.troca)
 

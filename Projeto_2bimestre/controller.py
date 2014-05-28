@@ -3,6 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from define import Algoritimo, Execucao,Detalhes
 from define import Base
+#import cx_Oracle
 
 class Controller:
 	engine = create_engine('sqlite:///classificacao_pesquisa.db')
@@ -16,6 +17,7 @@ class Controller:
 			session = self.DBSession()
 			session.add(objeto)
 			session.commit()
+			return objeto
 		except:
 			session.rollback()
 			raise
