@@ -24,4 +24,7 @@ class Util():
 				lista.append(i)
 			return lista
 		return lista
+
+	def imprimir(self,objeto):
+		print objeto
 		

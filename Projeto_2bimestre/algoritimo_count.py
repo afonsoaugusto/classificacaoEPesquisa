@@ -7,6 +7,9 @@ class AlgorithmInterface(object):
 	def sort(self):
 		pass
 
+	def find(self,element):
+		pass
+
 class Algorithm(AlgorithmInterface):
 
 	def __init__(self, vetor):
@@ -15,6 +18,9 @@ class Algorithm(AlgorithmInterface):
 		self.troca = 0
 
 	def sort(self):
+		pass
+
+	def find(self,element):
 		pass
 
 class SelectionSort(Algorithm):

@@ -25,7 +25,7 @@ def main():
 	arvoreBinaria = arvoreBinariaInit(controller)
 	arvoreAvl = arvoreAVLInit(controller)
 	arvoreBTree = arvoreBTreeInit(controller)
-	n = 100
+	n = 2
 	for i in range(3):
 		for a in (['-A','-D','-C']):
 			execucao = Execucao()
@@ -34,7 +34,7 @@ def main():
 			execucao = controller.persistirObjeto(execucao)
 			util = Util()
 			vector = util.geraVetor(execucao)
-			
+
 			#parte individual de cada teste
 			detalhes = detalhesInit(execucao,selecao)
 			select = SelectionSort(vector[:])
