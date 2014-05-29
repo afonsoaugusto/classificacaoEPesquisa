@@ -3,6 +3,7 @@ import sys
 import time
 from random import randint
 from define import Execucao
+import datetime
 
 
 class Util():
@@ -26,5 +27,9 @@ class Util():
 		return lista
 
 	def imprimir(self,objeto):
-		print objeto
+		name = 'classPesq'
+		f = open(name+ str(datetime.date.today())+'.log','a')
+		f.write(name +' '+str(datetime.datetime.utcnow()) + ' - '+  str(objeto) + '\n') 
+		f.close() 
+		print str(objeto)
 		

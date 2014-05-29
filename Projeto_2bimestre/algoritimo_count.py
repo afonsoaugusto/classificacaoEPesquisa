@@ -10,6 +10,9 @@ class AlgorithmInterface(object):
 	def find(self,element):
 		pass
 
+	def isEqual(x,y):
+		pass
+
 class Algorithm(AlgorithmInterface):
 
 	def __init__(self, vetor):
@@ -22,6 +25,31 @@ class Algorithm(AlgorithmInterface):
 
 	def find(self,element):
 		pass
+
+	def isEqual(self,x,y) : return x == y
+	def isNotEqual(self,x,y) : return x != y
+
+class SearchLinear(Algorithm):
+
+	def find(self,element):
+		for i in range(len(self.vetor)):
+			self.comparacao += 1
+			if self.isEqual(self.vetor[i],element):
+				return i
+		return (-1)
+
+class SearchLinearSentinel(Algorithm):
+	def find(self,element):
+		self.vetor.append(element)
+		i = 0
+		while (self.isNotEqual(self.vetor[i],element)):
+			i += 1
+		
+		if i == (len(self.vetor)-1):
+			return (-1)
+		else:
+			return i
+		
 
 class SelectionSort(Algorithm):
 

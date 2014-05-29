@@ -12,6 +12,10 @@ from algoritimo_count import ShellSort
 from algoritimo_count import InsertionSort
 from algoritimo_count import Quicksort
 from algoritimo_count import Heapsort
+from algoritimo_count import SearchLinear
+from algoritimo_count import SearchLinearSentinel
+
+util = Util()
 
 def main():
 	sys.setrecursionlimit(2 ** 30)
@@ -25,15 +29,17 @@ def main():
 	arvoreBinaria = arvoreBinariaInit(controller)
 	arvoreAvl = arvoreAVLInit(controller)
 	arvoreBTree = arvoreBTreeInit(controller)
-	n = 2
+	n = 25
 	for i in range(3):
 		for a in (['-A','-D','-C']):
 			execucao = Execucao()
 			execucao.MODE = a
 			execucao.N = n * n
 			execucao = controller.persistirObjeto(execucao)
-			util = Util()
 			vector = util.geraVetor(execucao)
+			#util.imprimir(vector)
+
+
 
 			#parte individual de cada teste
 			detalhes = detalhesInit(execucao,selecao)
@@ -46,11 +52,27 @@ def main():
 			detalhes = verificaTempo(select,detalhes)
 			detalhes = controller.persistirObjeto(detalhes)
 
+			detalhes = detalhesInit(execucao,buscaLinear)
+			find = SearchLinear(vector[:])
+			detalhes = verificaTempoBusca(find,execucao,detalhes)
+			detalhes = controller.persistirObjeto(detalhes)
 
-def detalhesInit(execucao,algoritimo):
-	detalhes = Detalhes()
-	detalhes.execucao_id = execucao.id
-	detalhes.algoritimo_id = algoritimo.id
+			detalhes = detalhesInit(execucao,buscaLinearSentinela)
+			find = SearchLinearSentinel(vector[:])
+			detalhes = verificaTempoBusca(find,execucao,detalhes)
+			detalhes = controller.persistirObjeto(detalhes)
+
+
+
+def verificaTempoBusca(find,execucao,detalhes):
+	time_start = time.time()
+	indice = find.find(execucao.NUM_FIND)
+	time_stop = time.time()
+	time_execution = time_stop - time_start
+	detalhes.tempoExecucao = time_execution
+	detalhes.quantidadeComparacoes = find.comparacao
+	detalhes.quantidadeTrocas = find.troca
+	util.imprimir(indice)
 	return detalhes
 
 def verificaTempo(select,detalhes):
@@ -63,6 +85,16 @@ def verificaTempo(select,detalhes):
 	detalhes.quantidadeTrocas = select.troca
 	return detalhes
 
+
+
+
+
+#Inicialização de objetos
+def detalhesInit(execucao,algoritimo):
+	detalhes = Detalhes()
+	detalhes.execucao_id = execucao.id
+	detalhes.algoritimo_id = algoritimo.id
+	return detalhes
 
 def buscaLinearInit(controller):
 	nome = 'Busca Linear'
