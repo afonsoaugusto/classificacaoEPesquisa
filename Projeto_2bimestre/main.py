@@ -14,6 +14,8 @@ from algoritimo_count import Quicksort
 from algoritimo_count import Heapsort
 from algoritimo_count import SearchLinear
 from algoritimo_count import SearchLinearSentinel
+from algoritimo_count import SearchBinary
+from algoritimo_count import SearchBinaryRecursion
 
 util = Util()
 
@@ -29,19 +31,23 @@ def main():
 	arvoreBinaria = arvoreBinariaInit(controller)
 	arvoreAvl = arvoreAVLInit(controller)
 	arvoreBTree = arvoreBTreeInit(controller)
-	n = 25
+
 	for i in range(3):
-		for a in (['-A','-D','-C']):
+		n = 5
+		for a in (['-A','-A','-A']):
 			execucao = Execucao()
 			execucao.MODE = a
-			execucao.N = n * n
+			n = n * n
+			execucao.N = n
 			execucao = controller.persistirObjeto(execucao)
 			vector = util.geraVetor(execucao)
-			#util.imprimir(vector)
+			util.imprimir(' ')
+			util.imprimir(len(vector))
 
 
 
 			#parte individual de cada teste
+			'''
 			detalhes = detalhesInit(execucao,selecao)
 			select = SelectionSort(vector[:])
 			detalhes = verificaTempo(select,detalhes)
@@ -51,16 +57,29 @@ def main():
 			select = BubbleSort(vector[:])
 			detalhes = verificaTempo(select,detalhes)
 			detalhes = controller.persistirObjeto(detalhes)
-
+			
+			#Seção de buscas
+			util.imprimir('buscaLinear')			
 			detalhes = detalhesInit(execucao,buscaLinear)
 			find = SearchLinear(vector[:])
 			detalhes = verificaTempoBusca(find,execucao,detalhes)
 			detalhes = controller.persistirObjeto(detalhes)
 
+			util.imprimir('buscaLinearSentinela')
 			detalhes = detalhesInit(execucao,buscaLinearSentinela)
 			find = SearchLinearSentinel(vector[:])
 			detalhes = verificaTempoBusca(find,execucao,detalhes)
 			detalhes = controller.persistirObjeto(detalhes)
+			'''
+			vetor = vector[:]
+			vetor.sort()
+
+			util.imprimir('buscaBinaria')
+			detalhes = detalhesInit(execucao,buscaBinaria)
+			find = SearchBinary(vetor[:])
+			detalhes = verificaTempoBusca(find,execucao,detalhes)
+			detalhes = controller.persistirObjeto(detalhes)
+
 
 
 
@@ -73,6 +92,7 @@ def verificaTempoBusca(find,execucao,detalhes):
 	detalhes.quantidadeComparacoes = find.comparacao
 	detalhes.quantidadeTrocas = find.troca
 	util.imprimir(indice)
+	util.imprimir(time_execution)
 	return detalhes
 
 def verificaTempo(select,detalhes):

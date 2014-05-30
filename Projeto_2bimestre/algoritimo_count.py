@@ -42,14 +42,42 @@ class SearchLinearSentinel(Algorithm):
 	def find(self,element):
 		self.vetor.append(element)
 		i = 0
+		self.comparacao += 1
 		while (self.isNotEqual(self.vetor[i],element)):
 			i += 1
+			self.comparacao += 1
 		
+		self.comparacao += 1
 		if i == (len(self.vetor)-1):
 			return (-1)
 		else:
 			return i
-		
+
+class SearchBinary(Algorithm):
+
+	def find(self,element):
+		low = 0
+		high = len(self.vetor)-1
+		while low <= high: 
+			mid = (low+high)//2
+			if self.vetor[mid] > element: high = mid-1
+			elif self.vetor[mid] < element: low = mid+1
+			else: return mid
+		return -1
+
+class SearchBinaryRecursion(Algorithm):
+
+	def find(self,value, low = 0, high = -1):
+		if not self.vetor: return -1
+		if(high == -1): high = len(self.vetor)-1
+		if low == high:
+			if self.vetor[low] == value: return low
+			else: return -1
+		mid = (low+high)//2
+		if self.vetor[mid] > value: return self.find(value, low, mid-1)
+		elif self.vetor[mid] < value: return self.find(value, mid+1, high)
+		else: return mid
+
 
 class SelectionSort(Algorithm):
 

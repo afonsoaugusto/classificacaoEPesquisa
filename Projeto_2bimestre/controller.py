@@ -34,8 +34,11 @@ class Controller:
 	def findAlgoritimo(self,algoritimo):
 		try:
 			session = self.DBSession()
-			algoritimo = session.query(Algoritimo).filter(Algoritimo.nomeAlgoritimo == algoritimo.nomeAlgoritimo).one()
-			return algoritimo
+			if (session.query(Algoritimo).filter(Algoritimo.nomeAlgoritimo == algoritimo.nomeAlgoritimo).count() > 0):
+				algoritimo = session.query(Algoritimo).filter(Algoritimo.nomeAlgoritimo == algoritimo.nomeAlgoritimo).one()
+				return algoritimo
+			else:
+				return None
 		except:
 			session.rollback()
 			return None
