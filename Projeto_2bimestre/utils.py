@@ -7,6 +7,10 @@ import datetime
 
 
 class Util():
+	DEBUG = 'DEBUG'
+	ERROR = 'ERROR'
+	INFO  = 'INFO'
+	NIVEL_ASSUMIDO = [ERROR,DEBUG]
 	def geraVetor(self, execucao):
 		lista = []
 		
@@ -26,10 +30,11 @@ class Util():
 			return lista
 		return lista
 
-	def imprimir(self,objeto):
-		name = 'classPesq'
-		f = open(name+ str(datetime.date.today())+'.log','a')
-		f.write(name +' '+str(datetime.datetime.utcnow()) + ' - '+  str(objeto) + '\n') 
-		f.close() 
-		print str(objeto)
+	def imprimir(self,nivel,objeto):
+		if nivel in self.NIVEL_ASSUMIDO:
+			name = 'classPesq'
+			f = open(name+ str(datetime.date.today())+'.log','a')
+			f.write(nivel +' '+str(datetime.datetime.utcnow()) + ' - '+  str(objeto) + '\n') 
+			f.close() 
+			print str(objeto)
 		

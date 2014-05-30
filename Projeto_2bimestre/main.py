@@ -16,6 +16,7 @@ from algoritimo_count import SearchLinear
 from algoritimo_count import SearchLinearSentinel
 from algoritimo_count import SearchBinary
 from algoritimo_count import SearchBinaryRecursion
+from treeBinary import searchtree
 
 util = Util()
 
@@ -41,8 +42,8 @@ def main():
 			execucao.N = n
 			execucao = controller.persistirObjeto(execucao)
 			vector = util.geraVetor(execucao)
-			util.imprimir(' ')
-			util.imprimir(len(vector))
+			util.imprimir(util.DEBUG, ('tamanho do vetor:' + str(len(vector))))
+			
 
 
 
@@ -70,7 +71,7 @@ def main():
 			find = SearchLinearSentinel(vector[:])
 			detalhes = verificaTempoBusca(find,execucao,detalhes)
 			detalhes = controller.persistirObjeto(detalhes)
-			'''
+			
 			vetor = vector[:]
 			vetor.sort()
 
@@ -79,8 +80,37 @@ def main():
 			find = SearchBinary(vetor[:])
 			detalhes = verificaTempoBusca(find,execucao,detalhes)
 			detalhes = controller.persistirObjeto(detalhes)
+			
 
+			util.imprimir(util.DEBUG,'arvoreBinaria')
+			detalhes = detalhesInit(execucao,arvoreBinaria)
+			tree = searchtree()		
+			verificaTempoArvore(execucao,detalhes,vector[:],tree)
+			detalhes = controller.persistirObjeto(detalhes)
 
+			util.imprimir(util.DEBUG,'Breadth-First Traversal')
+			tree.bft()
+			util.imprimir(util.DEBUG,'Inorder Traversal')
+			tree.inorder(tree.root) 
+			util.imprimir(util.DEBUG,'Preorder Traversal')
+			tree.preorder(tree.root) 
+			util.imprimir(util.DEBUG,'Postorder Traversal')
+			tree.postorder(tree.root) 
+			'''
+			
+			
+
+def verificaTempoArvore(execucao,detalhes,vector,arvore):
+	time_start = time.time()
+	for i in (vector):
+		arvore.create(i)
+	time_stop = time.time()
+	time_execution = time_stop - time_start
+	detalhes.tempoExecucao = time_execution
+	detalhes.quantidadeComparacoes = arvore.comparacao
+	detalhes.quantidadeTrocas = arvore.troca
+	util.imprimir(util.DEBUG, 'time_execution: '+ str(time_execution))
+	return detalhes
 
 
 def verificaTempoBusca(find,execucao,detalhes):
@@ -91,8 +121,8 @@ def verificaTempoBusca(find,execucao,detalhes):
 	detalhes.tempoExecucao = time_execution
 	detalhes.quantidadeComparacoes = find.comparacao
 	detalhes.quantidadeTrocas = find.troca
-	util.imprimir(indice)
-	util.imprimir(time_execution)
+	util.imprimir(util.DEBUG, 'INDICE: '+ str(indice))
+	util.imprimir(util.DEBUG, 'time_execution: '+ str(time_execution))
 	return detalhes
 
 def verificaTempo(select,detalhes):
@@ -104,6 +134,47 @@ def verificaTempo(select,detalhes):
 	detalhes.quantidadeComparacoes = select.comparacao
 	detalhes.quantidadeTrocas = select.troca
 	return detalhes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

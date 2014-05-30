@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 #https://gist.github.com/thinkphp/1450738#file-gistfile1-py-L18
+from utils import Util
 '''
    by Adrian Statescu <adrian@thinkphp.ro>
    Twitter: @thinkphp
@@ -38,37 +39,50 @@ class searchtree:
       def __init__(self): #constructor of class
  
           self.root = None
+          self.comparacao = 0
+          self.troca = 0
+          self.util = Util()
  
  
       def create(self,val):  #create binary search tree nodes
  
+          self.comparacao += 1
           if self.root == None:
- 
              self.root = Node(val)
+             self.troca += 1
  
           else:
- 
              current = self.root
+             self.troca += 1
  
              while 1:
  
+                 self.comparacao += 1
                  if val < current.info:
  
+                   self.comparacao += 1
                    if current.left:
                       current = current.left
+                      self.troca += 1
                    else:
                       current.left = Node(val)
+                      self.troca += 1
                       break;      
  
                  elif val > current.info:
+                    self.comparacao += 1
                  
+                    self.comparacao += 1
                     if current.right:
+                       self.troca += 1
                        current = current.right
                     else:
+                       self.troca += 1
                        current.right = Node(val)
                        break;      
  
                  else:
+                    self.comparacao += 1
                     break 
  
       def bft(self): #Breadth-First Traversal
@@ -100,7 +114,7 @@ class searchtree:
                 queue.append(current_node.right)
                       
                  
-          print "".join(out)   
+          self.util.imprimir(self.util.INFO,"".join(out))   
  
  
       def inorder(self,node):
@@ -108,7 +122,7 @@ class searchtree:
            if node is not None:
               
               self.inorder(node.left)
-              print node.info
+              self.util.imprimir(self.util.INFO,node.info)
               self.inorder(node.right)
  
  
@@ -116,7 +130,7 @@ class searchtree:
             
            if node is not None:
               
-              print node.info
+              self.util.imprimir(self.util.INFO,node.info)
               self.preorder(node.left)
               self.preorder(node.right)
  
@@ -127,5 +141,5 @@ class searchtree:
               
               self.postorder(node.left)
               self.postorder(node.right)
-              print node.info
+              self.util.imprimir(self.util.INFO,node.info)
  
