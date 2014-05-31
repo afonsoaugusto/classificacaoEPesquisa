@@ -6,17 +6,13 @@ from define import Algoritimo, Execucao,Detalhes
 from random import randint
 from controller import Controller
 from utils import Util
-from algoritimo_count import SelectionSort
-from algoritimo_count import BubbleSort
-from algoritimo_count import ShellSort
-from algoritimo_count import InsertionSort
-from algoritimo_count import Quicksort
-from algoritimo_count import Heapsort
-from algoritimo_count import SearchLinear
-from algoritimo_count import SearchLinearSentinel
-from algoritimo_count import SearchBinary
-from algoritimo_count import SearchBinaryRecursion
+from algoritimo_count import SelectionSort, BubbleSort, ShellSort
+from algoritimo_count import InsertionSort, Quicksort, Heapsort
+from algoritimo_count import SearchLinear, SearchLinearSentinel
+from algoritimo_count import SearchBinary, SearchBinaryRecursion
 from treeBinary import searchtree
+from treeAvl import AVLTree
+from bTree import BTree
 
 util = Util()
 
@@ -24,86 +20,118 @@ def main():
 	sys.setrecursionlimit(2 ** 30)
 	controller = Controller()
 
-	buscaLinear = buscaLinearInit(controller) 
-	buscaLinearSentinela = buscaLinearSentinelaInit(controller)
-	buscaBinaria = buscaLinearBinariaInit(controller)
-	selecao = ordenacaoSelecaoInit(controller)
-	bubblesort = ordenacaoBolhaInit(controller)
-	arvoreBinaria = arvoreBinariaInit(controller)
-	arvoreAvl = arvoreAVLInit(controller)
-	arvoreBTree = arvoreBTreeInit(controller)
+	buscaLinear = algoritimoInit(controller,'Busca Linear','Algoritmo de busca','Array, Listas ligadas','O(n)','O(n/2)','{O}(1)','')
+	buscaLinearSentinela = algoritimoInit(controller,'Busca Linear Sentinela','Algoritmo de busca','Array, Listas ligadas','O(n)','O(n/2)','{O}(1)','')
+	buscaBinaria = algoritimoInit(controller,'Busca Binaria','Algoritmo de busca','Array, Listas ligadas','O(\log n)','O(n/2)','{O}(1)','{O}(\log n)')
+	selecao = algoritimoInit(controller,'Ordenação Seleção','Algoritmo de ordenação','Array, Listas ligadas','O(n^2)','O(n^2)','O(n^2)','O(n) total, O(1) auxiliar')
+	bubblesort = algoritimoInit(controller,'Ordenação BubbleSort','Algoritmo de ordenação','Array, Listas ligadas','O(n^2)','O(n^2)','O(n)','O(1) auxiliar')
+	arvoreBinaria = algoritimoInit(controller,'Arvore Binaria','Arvore','Array, Listas ligadas',' ',' ',' ',' ')
+	arvoreAvl = algoritimoInit(controller,'Arvore AVL','Arvore','Array, Listas ligadas',' ',' ',' ',' ')
+	arvoreBTree = algoritimoInit(controller,'Arvore B-Tree','Arvore','Array, Listas ligadas',' ',' ',' ',' ')
 
-	for i in range(3):
-		n = 5
-		for a in (['-A','-A','-A']):
-			execucao = Execucao()
-			execucao.MODE = a
-			n = n * n
-			execucao.N = n
-			execucao = controller.persistirObjeto(execucao)
-			vector = util.geraVetor(execucao)
-			util.imprimir(util.DEBUG, ('tamanho do vetor:' + str(len(vector))))
+	#ex1 = [500,5000,10000]
+	#ex2 = [500,5000,10000]
+	#ex3 = [500,5000,10000]
+	ex1 = [50,500,1000]
+	ex2 = [50,500,1000]
+	ex3 = [50,500,1000]
+	for i in ([ex1,ex2,ex3]):
+		for b in i:
+			for a in (['-A','-C','-D']):
+				execucao = Execucao()
+				execucao.MODE = a
+				execucao.N = b
+				execucao = controller.persistirObjeto(execucao)
+				vector = util.geraVetor(execucao)
+				util.imprimir(util.DEBUG, ('-------- Execucao de numero:' + str(execucao.id) + ' --------'))
+				util.imprimir(util.DEBUG, ('tamanho do vetor:' + str(len(vector)) + ' Modo: '+a ))
+				
+				#parte individual de cada teste
+				
+				util.imprimir(util.DEBUG,'selecao')
+				detalhes = detalhesInit(execucao,selecao)
+				select = SelectionSort(vector[:])
+				detalhes = verificaTempo(select,detalhes)
+				detalhes = controller.persistirObjeto(detalhes)
+
+				util.imprimir(util.DEBUG,'bubblesort')
+				detalhes = detalhesInit(execucao,bubblesort)
+				select = BubbleSort(vector[:])
+				detalhes = verificaTempo(select,detalhes)
+				detalhes = controller.persistirObjeto(detalhes)
+				
+				#Seção de buscas
+				util.imprimir(util.DEBUG,'buscaLinear')			
+				detalhes = detalhesInit(execucao,buscaLinear)
+				find = SearchLinear(vector[:])
+				detalhes = verificaTempoBusca(find,execucao,detalhes)
+				detalhes = controller.persistirObjeto(detalhes)
+
+				util.imprimir(util.DEBUG,'buscaLinearSentinela')
+				detalhes = detalhesInit(execucao,buscaLinearSentinela)
+				find = SearchLinearSentinel(vector[:])
+				detalhes = verificaTempoBusca(find,execucao,detalhes)
+				detalhes = controller.persistirObjeto(detalhes)
+				
+
+				vetorOrdenado = vector[:]
+				vetorOrdenado.sort()
+
+				util.imprimir(util.DEBUG,'buscaBinaria')
+				detalhes = detalhesInit(execucao,buscaBinaria)
+				find = SearchBinary(vetorOrdenado[:])
+				detalhes = verificaTempoBusca(find,execucao,detalhes)
+				detalhes = controller.persistirObjeto(detalhes)
+				
+				util.imprimir(util.DEBUG,'arvoreBinaria')
+				detalhes = detalhesInit(execucao,arvoreBinaria)
+				tree = searchtree()		
+				verificaTempoArvore(execucao,detalhes,vector[:],tree)
+				detalhes = controller.persistirObjeto(detalhes)
+
+				util.imprimir(util.DEBUG,'arvoreAvl')
+				detalhes = detalhesInit(execucao,arvoreAvl)
+				verificaTempoArvoreAVL(execucao,detalhes,vector[:])
+				detalhes = controller.persistirObjeto(detalhes)
+				
+
+				util.imprimir(util.DEBUG,'arvoreBTree')
+				detalhes = detalhesInit(execucao,arvoreBTree)
+				util.imprimir(util.DEBUG,'ordem:' + str(b))
+				tree = BTree(b)		
+				verificaTempoArvore(execucao,detalhes,vector[:],tree)
+				detalhes = controller.persistirObjeto(detalhes)
+
+				'''
+				util.imprimir(util.DEBUG,'Breadth-First Traversal')
+				tree.bft()
+				util.imprimir(util.DEBUG,'Inorder Traversal')
+				tree.inorder(tree.root) 
+				util.imprimir(util.DEBUG,'Preorder Traversal')
+				tree.preorder(tree.root) 
+				util.imprimir(util.DEBUG,'Postorder Traversal')
+				tree.postorder(tree.root) 
+				'''
+				
 			
-
-
-
-			#parte individual de cada teste
-			'''
-			detalhes = detalhesInit(execucao,selecao)
-			select = SelectionSort(vector[:])
-			detalhes = verificaTempo(select,detalhes)
-			detalhes = controller.persistirObjeto(detalhes)
-
-			detalhes = detalhesInit(execucao,bubblesort)
-			select = BubbleSort(vector[:])
-			detalhes = verificaTempo(select,detalhes)
-			detalhes = controller.persistirObjeto(detalhes)
 			
-			#Seção de buscas
-			util.imprimir('buscaLinear')			
-			detalhes = detalhesInit(execucao,buscaLinear)
-			find = SearchLinear(vector[:])
-			detalhes = verificaTempoBusca(find,execucao,detalhes)
-			detalhes = controller.persistirObjeto(detalhes)
+def verificaTempoArvoreAVL(execucao,detalhes,vector):
+	time_start = time.time()
+	arvore = AVLTree(vector)	
+	time_stop = time.time()
+	time_execution = time_stop - time_start
+	arvore.sanity_check()
+	detalhes.tempoExecucao = time_execution
+	detalhes.quantidadeComparacoes = arvore.comparacao
+	detalhes.quantidadeTrocas = arvore.troca
+	util.imprimir(util.DEBUG, 'time_execution: '+ str(time_execution))
+	return detalhes
 
-			util.imprimir('buscaLinearSentinela')
-			detalhes = detalhesInit(execucao,buscaLinearSentinela)
-			find = SearchLinearSentinel(vector[:])
-			detalhes = verificaTempoBusca(find,execucao,detalhes)
-			detalhes = controller.persistirObjeto(detalhes)
-			
-			vetor = vector[:]
-			vetor.sort()
-
-			util.imprimir('buscaBinaria')
-			detalhes = detalhesInit(execucao,buscaBinaria)
-			find = SearchBinary(vetor[:])
-			detalhes = verificaTempoBusca(find,execucao,detalhes)
-			detalhes = controller.persistirObjeto(detalhes)
-			
-
-			util.imprimir(util.DEBUG,'arvoreBinaria')
-			detalhes = detalhesInit(execucao,arvoreBinaria)
-			tree = searchtree()		
-			verificaTempoArvore(execucao,detalhes,vector[:],tree)
-			detalhes = controller.persistirObjeto(detalhes)
-
-			util.imprimir(util.DEBUG,'Breadth-First Traversal')
-			tree.bft()
-			util.imprimir(util.DEBUG,'Inorder Traversal')
-			tree.inorder(tree.root) 
-			util.imprimir(util.DEBUG,'Preorder Traversal')
-			tree.preorder(tree.root) 
-			util.imprimir(util.DEBUG,'Postorder Traversal')
-			tree.postorder(tree.root) 
-			'''
-			
-			
 
 def verificaTempoArvore(execucao,detalhes,vector,arvore):
 	time_start = time.time()
 	for i in (vector):
-		arvore.create(i)
+		arvore.insert(i)
 	time_stop = time.time()
 	time_execution = time_stop - time_start
 	detalhes.tempoExecucao = time_execution
@@ -135,51 +163,6 @@ def verificaTempo(select,detalhes):
 	detalhes.quantidadeTrocas = select.troca
 	return detalhes
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #Inicialização de objetos
 def detalhesInit(execucao,algoritimo):
 	detalhes = Detalhes()
@@ -187,131 +170,25 @@ def detalhesInit(execucao,algoritimo):
 	detalhes.algoritimo_id = algoritimo.id
 	return detalhes
 
-def buscaLinearInit(controller):
-	nome = 'Busca Linear'
-	algoritimo = Algoritimo()
-	algoritimo.nomeAlgoritimo = 'Busca Linear'
-	algoritimo = controller.findAlgoritimo(algoritimo)
-	if algoritimo == None:
-		algoritimo = Algoritimo()
-		algoritimo.nomeAlgoritimo = nome
-		algoritimo.classe = 'Algoritmo de busca'
-		algoritimo.estruturaDados = 'Array, Listas ligadas'
-		algoritimo.complexidadePiorCaso = 'O(n)'
-		algoritimo.complexidadeMedioCaso = 'O(n/2)'
-		algoritimo.complexidadeMelhorCaso = '{O}(1)'
-		algoritimo.complexidadeEspacos = ''
-		algoritimo.pseudoAlgoritimo = ''
-		algoritimo = controller.persistirObjeto(algoritimo)
-	return algoritimo
-	
-def buscaLinearSentinelaInit(controller):
-	nome = 'Busca Linear Sentinela'
+def algoritimoInit(controller,nome,classe,estruturaDados,complexidadePiorCaso,complexidadeMedioCaso,complexidadeMelhorCaso,complexidadeEspacos):
 	algoritimo = Algoritimo()
 	algoritimo.nomeAlgoritimo = nome
 	algoritimo = controller.findAlgoritimo(algoritimo)
 	if algoritimo == None:
 		algoritimo = Algoritimo()
 		algoritimo.nomeAlgoritimo = nome
-		algoritimo.classe = 'Algoritmo de busca'
-		algoritimo.estruturaDados = 'Array, Listas ligadas'
-		algoritimo.complexidadePiorCaso = '{O}(n)'
-		algoritimo.complexidadeMedioCaso = 'O(n/2)'
-		algoritimo.complexidadeMelhorCaso = '{O}(1)'
-		algoritimo.complexidadeEspacos = ''
+		algoritimo.classe = classe
+		algoritimo.estruturaDados = estruturaDados
+		algoritimo.complexidadePiorCaso = complexidadePiorCaso
+		algoritimo.complexidadeMedioCaso = complexidadeMedioCaso
+		algoritimo.complexidadeMelhorCaso = complexidadeMelhorCaso
+		algoritimo.complexidadeEspacos = complexidadeEspacos
 		algoritimo.pseudoAlgoritimo = ''
 		algoritimo = controller.persistirObjeto(algoritimo)
 	return algoritimo
 	
-def buscaLinearBinariaInit(controller):
-	nome = 'Busca Binaria'
-	algoritimo = Algoritimo()
-	algoritimo.nomeAlgoritimo = nome
-	algoritimo = controller.findAlgoritimo(algoritimo)
-	if algoritimo == None:
-		algoritimo = Algoritimo()
-		algoritimo.nomeAlgoritimo = nome
-		algoritimo.classe = 'Algoritmo de busca'
-		algoritimo.estruturaDados = 'Array, Listas ligadas'
-		algoritimo.complexidadePiorCaso = 'O(\log n)'
-		algoritimo.complexidadeMedioCaso = 'O(n/2)'
-		algoritimo.complexidadeMelhorCaso = '{O}(1)'
-		algoritimo.complexidadeEspacos = '{O}(\log n)'
-		algoritimo.pseudoAlgoritimo = ''
-		algoritimo = controller.persistirObjeto(algoritimo)
-	return algoritimo
-	
-def ordenacaoSelecaoInit(controller):
-	nome = 'Ordenação Seleção'
-	algoritimo = Algoritimo()
-	algoritimo.nomeAlgoritimo = nome
-	algoritimo = controller.findAlgoritimo(algoritimo)
-	if algoritimo == None:
-		algoritimo = Algoritimo()
-		algoritimo.nomeAlgoritimo = nome
-		algoritimo.classe = 'Algoritmo de ordenação'
-		algoritimo.estruturaDados = 'Array, Listas ligadas'
-		algoritimo.complexidadePiorCaso = u'O(n^2)'
-		algoritimo.complexidadeMedioCaso = u'O(n^2)'
-		algoritimo.complexidadeMelhorCaso = u'O(n^2)'
-		algoritimo.complexidadeEspacos = u'O(n) total, O(1) auxiliar'
-		algoritimo.pseudoAlgoritimo = ''
-		algoritimo = controller.persistirObjeto(algoritimo)
-	return algoritimo
 
-def ordenacaoBolhaInit(controller):
-	nome = 'Ordenação BubbleSort'
-	algoritimo = Algoritimo()
-	algoritimo.nomeAlgoritimo = nome
-	algoritimo = controller.findAlgoritimo(algoritimo)
-	if algoritimo == None:
-		algoritimo = Algoritimo()
-		algoritimo.nomeAlgoritimo = nome
-		algoritimo.classe = 'Algoritmo de ordenação'
-		algoritimo.estruturaDados = 'Array, Listas ligadas'
-		algoritimo.complexidadePiorCaso = u'O(n^2)'
-		algoritimo.complexidadeMedioCaso = u'O(n^2)'
-		algoritimo.complexidadeMelhorCaso = u'O(n)'
-		algoritimo.complexidadeEspacos = u'O(1) auxiliar'
-		algoritimo.pseudoAlgoritimo = ''
-		algoritimo = controller.persistirObjeto(algoritimo)
-	return algoritimo
-	
-def arvoreBinariaInit(controller):
-	nome = 'Arvore Binaria'
-	algoritimo = Algoritimo()
-	algoritimo.nomeAlgoritimo = nome
-	algoritimo = controller.findAlgoritimo(algoritimo)
-	if algoritimo == None:
-		algoritimo = Algoritimo()
-		algoritimo.nomeAlgoritimo = nome
-		algoritimo = controller.persistirObjeto(algoritimo)
-	return algoritimo
 
-	
-def arvoreAVLInit(controller):
-	nome = 'Arvore AVL'
-	algoritimo = Algoritimo()
-	algoritimo.nomeAlgoritimo = nome
-	algoritimo = controller.findAlgoritimo(algoritimo)
-	if algoritimo == None:
-		algoritimo = Algoritimo()
-		algoritimo.nomeAlgoritimo = nome
-		algoritimo = controller.persistirObjeto(algoritimo)
-	return algoritimo
-	
-def arvoreBTreeInit(controller):
-	nome = 'Arvore B-Tree'
-	algoritimo = Algoritimo()
-	algoritimo.nomeAlgoritimo = nome
-	algoritimo = controller.findAlgoritimo(algoritimo)
-	if algoritimo == None:
-		algoritimo = Algoritimo()
-		algoritimo.nomeAlgoritimo = nome
-		algoritimo = controller.persistirObjeto(algoritimo)
-	return algoritimo
-
-	
 # ****** #
 main()
 

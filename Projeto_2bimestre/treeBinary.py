@@ -44,7 +44,7 @@ class searchtree:
           self.util = Util()
  
  
-      def create(self,val):  #create binary search tree nodes
+      def insert(self,val):  #insert binary search tree nodes
  
           self.comparacao += 1
           if self.root == None:
