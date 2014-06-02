@@ -1,3 +1,10 @@
+﻿Querys de consulta:
+
+
+
+
+
+
 Algoritimo -> Detalhes Execução <-Execução
 
 
