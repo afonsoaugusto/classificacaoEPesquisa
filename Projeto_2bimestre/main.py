@@ -29,12 +29,12 @@ def main():
 	arvoreAvl = algoritimoInit(controller,'Arvore AVL','Arvore','Array, Listas ligadas',' ',' ',' ',' ')
 	arvoreBTree = algoritimoInit(controller,'Arvore B-Tree','Arvore','Array, Listas ligadas',' ',' ',' ',' ')
 
-	#ex1 = [500,5000,10000]
-	#ex2 = [500,5000,10000]
-	#ex3 = [500,5000,10000]
-	ex1 = [50,500,1000]
-	ex2 = [50,500,1000]
-	ex3 = [50,500,1000]
+	ex1 = [500,5000,30000]
+	ex2 = [500,5000,30000]
+	ex3 = [500,5000,30000]
+	#ex1 = [50,500,1000]
+	#ex2 = [50,500,1000]
+	#ex3 = [50,500,1000]
 	for i in ([ex1,ex2,ex3]):
 		for b in i:
 			for a in (['-A','-C','-D']):
@@ -97,8 +97,8 @@ def main():
 
 				util.imprimir(util.DEBUG,'arvoreBTree')
 				detalhes = detalhesInit(execucao,arvoreBTree)
-				util.imprimir(util.DEBUG,'ordem:' + str(b))
-				tree = BTree(b)		
+				util.imprimir(util.DEBUG,'ordem:' + str(b/80))
+				tree = BTree(b/80)		
 				verificaTempoArvore(execucao,detalhes,vector[:],tree)
 				detalhes = controller.persistirObjeto(detalhes)
 
