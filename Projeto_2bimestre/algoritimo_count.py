@@ -58,9 +58,14 @@ class SearchBinary(Algorithm):
 	def find(self,element):
 		low = 0
 		high = len(self.vetor)-1
+		self.comparacao += 1
 		while low <= high: 
+			self.comparacao += 1
 			mid = (low+high)//2
-			if self.vetor[mid] > element: high = mid-1
+			self.comparacao += 1
+			if self.vetor[mid] > element: 
+				high = mid-1
+				self.comparacao += 1
 			elif self.vetor[mid] < element: low = mid+1
 			else: return mid
 		return -1

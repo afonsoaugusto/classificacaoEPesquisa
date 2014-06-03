@@ -29,9 +29,9 @@ def main():
 	arvoreAvl = algoritimoInit(controller,'Arvore AVL','Arvore','Array, Listas ligadas',' ',' ',' ',' ')
 	arvoreBTree = algoritimoInit(controller,'Arvore B-Tree','Arvore','Array, Listas ligadas',' ',' ',' ',' ')
 
-	ex1 = [500,5000,30000]
-	ex2 = [500,5000,30000]
-	ex3 = [500,5000,30000]
+	ex1 = [10000,30000,50000]
+	ex2 = [10000,30000,50000]
+	ex3 = [10000,30000,50000]
 	#ex1 = [50,500,1000]
 	#ex2 = [50,500,1000]
 	#ex3 = [50,500,1000]
@@ -47,7 +47,7 @@ def main():
 				util.imprimir(util.DEBUG, ('tamanho do vetor:' + str(len(vector)) + ' Modo: '+a ))
 				
 				#parte individual de cada teste
-				
+				'''
 				util.imprimir(util.DEBUG,'selecao')
 				detalhes = detalhesInit(execucao,selecao)
 				select = SelectionSort(vector[:])
@@ -72,7 +72,7 @@ def main():
 				find = SearchLinearSentinel(vector[:])
 				detalhes = verificaTempoBusca(find,execucao,detalhes)
 				detalhes = controller.persistirObjeto(detalhes)
-				
+				'''
 
 				vetorOrdenado = vector[:]
 				vetorOrdenado.sort()
@@ -82,7 +82,7 @@ def main():
 				find = SearchBinary(vetorOrdenado[:])
 				detalhes = verificaTempoBusca(find,execucao,detalhes)
 				detalhes = controller.persistirObjeto(detalhes)
-				
+				'''
 				util.imprimir(util.DEBUG,'arvoreBinaria')
 				detalhes = detalhesInit(execucao,arvoreBinaria)
 				tree = searchtree()		
@@ -97,11 +97,11 @@ def main():
 
 				util.imprimir(util.DEBUG,'arvoreBTree')
 				detalhes = detalhesInit(execucao,arvoreBTree)
-				util.imprimir(util.DEBUG,'ordem:' + str(b/80))
-				tree = BTree(b/80)		
+				util.imprimir(util.DEBUG,'ordem:' + str(b/2))
+				tree = BTree(b/2)		
 				verificaTempoArvore(execucao,detalhes,vector[:],tree)
 				detalhes = controller.persistirObjeto(detalhes)
-
+'''
 				'''
 				util.imprimir(util.DEBUG,'Breadth-First Traversal')
 				tree.bft()
