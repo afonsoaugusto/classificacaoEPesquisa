@@ -29,9 +29,9 @@ def main():
 	arvoreAvl = algoritimoInit(controller,'Arvore AVL','Arvore','Array, Listas ligadas',' ',' ',' ',' ')
 	arvoreBTree = algoritimoInit(controller,'Arvore B-Tree','Arvore','Array, Listas ligadas',' ',' ',' ',' ')
 
-	ex1 = [10000,30000,50000]
-	ex2 = [10000,30000,50000]
-	ex3 = [10000,30000,50000]
+	ex1 = [1000000,3000000,5000000]
+	ex2 = [1000000,3000000,5000000]
+	ex3 = [1000000,3000000,5000000]
 	#ex1 = [50,500,1000]
 	#ex2 = [50,500,1000]
 	#ex3 = [50,500,1000]
@@ -59,7 +59,8 @@ def main():
 				select = BubbleSort(vector[:])
 				detalhes = verificaTempo(select,detalhes)
 				detalhes = controller.persistirObjeto(detalhes)
-				
+				'''
+
 				#Seção de buscas
 				util.imprimir(util.DEBUG,'buscaLinear')			
 				detalhes = detalhesInit(execucao,buscaLinear)
@@ -72,7 +73,7 @@ def main():
 				find = SearchLinearSentinel(vector[:])
 				detalhes = verificaTempoBusca(find,execucao,detalhes)
 				detalhes = controller.persistirObjeto(detalhes)
-				'''
+				
 
 				vetorOrdenado = vector[:]
 				vetorOrdenado.sort()
@@ -82,6 +83,7 @@ def main():
 				find = SearchBinary(vetorOrdenado[:])
 				detalhes = verificaTempoBusca(find,execucao,detalhes)
 				detalhes = controller.persistirObjeto(detalhes)
+				
 				'''
 				util.imprimir(util.DEBUG,'arvoreBinaria')
 				detalhes = detalhesInit(execucao,arvoreBinaria)

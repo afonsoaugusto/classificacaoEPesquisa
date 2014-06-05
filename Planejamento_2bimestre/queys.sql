@@ -3,7 +3,7 @@ delete from execucao where id = 1;
 
 .headers on
 .mode csv
-.output test.csv
+.output dadosBusca.csv
 select a.nomeAlgoritimo, e.mode,e.n ,round(avg(d.quantidadeComparacoes)),round(avg(d.quantidadeTrocas)),round(avg(d.tempoExecucao))
 	   from detalhes d
 	   join execucao e on e.id = d.execucao_id
