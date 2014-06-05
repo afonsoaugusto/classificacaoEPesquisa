@@ -29,12 +29,12 @@ def main():
 	arvoreAvl = algoritimoInit(controller,'Arvore AVL','Arvore','Array, Listas ligadas',' ',' ',' ',' ')
 	arvoreBTree = algoritimoInit(controller,'Arvore B-Tree','Arvore','Array, Listas ligadas',' ',' ',' ',' ')
 
-	ex1 = [1000000,3000000,5000000]
-	ex2 = [1000000,3000000,5000000]
-	ex3 = [1000000,3000000,5000000]
-	#ex1 = [50,500,1000]
-	#ex2 = [50,500,1000]
-	#ex3 = [50,500,1000]
+	#ex1 = [1000000,3000000,5000000]
+	#ex2 = [1000000,3000000,5000000]
+	#ex3 = [1000000,3000000,5000000]
+	ex1 = [50,500,1000]
+	ex2 = [50,500,1000]
+	ex3 = [50,500,1000]
 	for i in ([ex1,ex2,ex3]):
 		for b in i:
 			for a in (['-A','-C','-D']):
@@ -47,7 +47,7 @@ def main():
 				util.imprimir(util.DEBUG, ('tamanho do vetor:' + str(len(vector)) + ' Modo: '+a ))
 				
 				#parte individual de cada teste
-				'''
+				
 				util.imprimir(util.DEBUG,'selecao')
 				detalhes = detalhesInit(execucao,selecao)
 				select = SelectionSort(vector[:])
@@ -59,7 +59,7 @@ def main():
 				select = BubbleSort(vector[:])
 				detalhes = verificaTempo(select,detalhes)
 				detalhes = controller.persistirObjeto(detalhes)
-				'''
+				
 
 				#Seção de buscas
 				util.imprimir(util.DEBUG,'buscaLinear')			
@@ -84,7 +84,7 @@ def main():
 				detalhes = verificaTempoBusca(find,execucao,detalhes)
 				detalhes = controller.persistirObjeto(detalhes)
 				
-				'''
+				
 				util.imprimir(util.DEBUG,'arvoreBinaria')
 				detalhes = detalhesInit(execucao,arvoreBinaria)
 				tree = searchtree()		
@@ -103,7 +103,7 @@ def main():
 				tree = BTree(b/2)		
 				verificaTempoArvore(execucao,detalhes,vector[:],tree)
 				detalhes = controller.persistirObjeto(detalhes)
-'''
+
 				'''
 				util.imprimir(util.DEBUG,'Breadth-First Traversal')
 				tree.bft()
